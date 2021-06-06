@@ -1,6 +1,36 @@
+const { toPairs } = require("ramda");
+
+const {
+  pathPrefix,
+  title,
+  author,
+  description,
+  siteUrl,
+  twitter = "",
+  github = "",
+  medium = "",
+  facebook = "",
+  disqusShortName = "",
+  lang = "en",
+  googleTrackingId: trackingId,
+} = require("./config").site;
+const supportedLanguages = require("./config").supportedLanguages;
+
 module.exports = {
   siteMetadata: {
-    title: "navid_khosh_rouz",
+    title,
+    author,
+    description,
+    siteUrl,
+    social: {
+      twitter,
+      github,
+      medium,
+      facebook,
+    },
+    disqusShortName,
+    lang,
+    langsEntries: toPairs(supportedLanguages),
   },
   plugins: [
     "gatsby-plugin-netlify-cms",
@@ -8,7 +38,7 @@ module.exports = {
     {
       resolve: "gatsby-plugin-google-analytics",
       options: {
-        trackingId: "G-1XCLDHVCXK",
+        trackingId,
       },
     },
     "gatsby-plugin-react-helmet",
